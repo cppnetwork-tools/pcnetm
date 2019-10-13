@@ -1,15 +1,14 @@
 # pcnetm
-
+```
 pcnetm stands for path characteristics network measurement.
+pcnetm is a rework of old pchar-1.5 to redesign and convert to modern C++.
+```
 
-pcnetm is a rework of old pchar-1.5 to convert to modern C++.
-
-### pchar
-
-
-At present, the latest version of pchar is the 1.5 version released in 2005, which has not been updated for more than ten years. The software can be obtained by the following command:
+### Obtaining old pchar
 
 ```
+At present, the latest version of pchar is the 1.5 version released in 2005, which has not been updated for more than ten years. The software can be obtained by the following command:
+
 wget http://www.kitchenlab.org/www/bmah/Software/pcnetm/pcnetm-1.5.tar.gz
 ```
 
