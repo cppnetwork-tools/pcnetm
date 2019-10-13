@@ -13,7 +13,7 @@ At present, the latest version of pchar is the 1.5 version released in 2005, whi
 wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
 ```
 
-## Description
+### Description
 
        Pchar  measures  the  characteristics  of  the network path between two Internet hosts, on
        either IPv4 or IPv6 networks.  It is  an  independently-written  reimplementation  of  the
@@ -77,7 +77,7 @@ wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
         0: 171.70.84.42 (bmah-freebsd-0.cisco.com)
         1: 171.70.84.44 (bmah-freebsd-1.cisco.com) 352 -> 352 bytes: 0.318 ms
 
-## Usage
+### Usage
 
 ```
        -a analysis
@@ -219,13 +219,13 @@ wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
               stream.
 ```
 
-## SEE ALSO
+### SEE ALSO
 
 ```
    pcap(3), ping(8), traceroute(8), pathchar(8)
 ```
 
-## Notes
+### Notes
 
 ```
        Because pchar relies on measurements to drive its estimates of network characteristics, it
@@ -240,7 +240,7 @@ wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
        or “pathchar clone”.
 ```
 
-## Bugs
+### Bugs
 
 ```
        Pathchar  automatically  determines  an appropriate maximum packet size to use, based on a
@@ -260,7 +260,7 @@ wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
        There are way too many command-line options
 ```
 
-## Author
+### Author
 
 ```
        Bruce  A. Mah <bmah@acm.org>.  The author of the original pathchar utility is Van Jacobson
@@ -268,10 +268,10 @@ wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
        describing the operation of pathchar.
 ```
 
-## Contributing
+### Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
-## License
+### License
 [MIT](https://choosealicense.com/licenses/mit/) 
