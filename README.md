@@ -2,29 +2,29 @@
 
 pcnetm stands for path characteristics network measurement.
 
-pcnetm is a rework of old pchar-1.5 to modern C++.
+pcnetm is a rework of old pcnetm-1.5 to convert to modern C++.
 
-### To get the old version of pchar
+### pchar
 
 
 At present, the latest version of pchar is the 1.5 version released in 2005, which has not been updated for more than ten years. The software can be obtained by the following command:
 
 ```
-wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
+wget http://www.kitchenlab.org/www/bmah/Software/pcnetm/pcnetm-1.5.tar.gz
 ```
 
 ### Description
 
-       Pchar  measures  the  characteristics  of  the network path between two Internet hosts, on
+       pcnetm  measures  the  characteristics  of  the network path between two Internet hosts, on
        either IPv4 or IPv6 networks.  It is  an  independently-written  reimplementation  of  the
        pathchar  utility, using similar algorithms.  Both programs measure network throughput and
        round-trip time by sending varying-sized UDP packets into the network and waiting for ICMP
        messages in response.  Like traceroute, they modulate the IPv4 time-to-live (TTL) field or
        the IPv6 hop limit field to get measurements at different distances along a path.
 
-       In its default mode, a run of pchar over a short path might produce an output  that  looks
+       In its default mode, a run of pcnetm over a short path might produce an output  that  looks
        like this:
-       pchar to dancer.ca.sandia.gov (146.246.246.1) using UDP/IPv4
+       pcnetm to dancer.ca.sandia.gov (146.246.246.1) using UDP/IPv4
        Packet size increments by 32 to 1500
        46 test(s) per repetition
        32 repetition(s) per hop
@@ -60,14 +60,14 @@ wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
        trip  time  and  bandwidth  for  the  current hop.  Finally, the partial queueing shows an
        estimate of the average queueing along the path, up to and including the current hop.
 
-       Between each hop, pchar prints the IP address and (if known) name of  the  host/router  at
+       Between each hop, pcnetm prints the IP address and (if known) name of  the  host/router  at
        the end of the link.
 
-       After  the last hop (usually the target host), pchar prints statistics on the entire path,
+       After  the last hop (usually the target host), pcnetm prints statistics on the entire path,
        including the path length and path pipe (the latter is an estimate of the  delay-bandwidth
        product of the path).
 
-       Pchar  has another mode of operation, called trout (short for “tiny traceroute”).  In this
+       pcnetm  has another mode of operation, called trout (short for “tiny traceroute”).  In this
        mode, packets of random sizes (one packet per hop diameter) are sent along the path  to  a
        destination.   No  attempt  at  estimating  link properties is made; however, this mode is
        extremely fast.  It is intended for use as a part of a larger measurement  infrastructure.
@@ -94,7 +94,7 @@ wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
               packets are useful for  measuring  store-and-forward  switched  subnets,  but  make
               measurements of fast links behind bottlenecks inaccurate.
 
-       -c     Ignore  routing  changes  detected during running.  Normally, pchar will exit if it
+       -c     Ignore  routing  changes  detected during running.  Normally, pcnetm will exit if it
               receives responses from more than one host for a  given  hop,  assuming  that  this
               condition  is  caused  by  a  routing  transient.   However, certain load-balancing
               schemes can also cause this condition.  In such situations, using the -c option may
@@ -121,7 +121,7 @@ wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
               experiment takes a non-zero amount of time, this is only an approximation.
 
        -H hops
-              Set the maximum number of hops that pchar will probe into the network.  The default
+              Set the maximum number of hops that pcnetm will probe into the network.  The default
               maximum is 30 hops, the same as with pathchar and traceroute.
 
        -h     Print usage information.
@@ -130,7 +130,7 @@ wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
               Set the interface to listen on for the -C option.
 
        -I increment
-              Set the probe packet size increment.  Pchar will send IP packets  with  sizes  that
+              Set the probe packet size increment.  pcnetm will send IP packets  with  sizes  that
               are  integer  multiples of increment, up to the maximum specified by the -m option.
               The default is a 32-byte increment.  Small increments should produce more  accurate
               results, but will result in more probes (thus taking longer to run).
@@ -145,7 +145,7 @@ wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
               MTU between the two hosts.  The default is 1500 bytes, the Ethernet MTU.
 
        -M mode
-              Set  operational  mode.   The  normal  operational mode is pchar, which uses active
+              Set  operational  mode.   The  normal  operational mode is pcnetm, which uses active
               probes to characterize the bandwidth, latency, loss,  and  queueing  of  the  links
               comprising  a path.  Another mode is trout, a “tiny traceroute” that is intended to
               be used as a portion of a larger network management infrastructure.
@@ -161,12 +161,12 @@ wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
               hostname  provided.   Compared  with  ipv4udp, the implementation of ipv4raw offers
               finer control over the contents of packet fields, but is otherwise identical.  Note
               that  the  ipv6icmp  and  ipv6udp  options  are  only available if IPv6 support was
-              compiled into pchar, which can be selected at configure time.  Finally, the ipv4tcp
+              compiled into pcnetm, which can be selected at configure time.  Finally, the ipv4tcp
               option  requires  that  pcap(3)  support be specified at configure time and enabled
               with the -C option.
 
        -P port
-              Select starting UDP port number (the default is  32768).   Pchar  uses  consecutive
+              Select starting UDP port number (the default is  32768).   pcnetm  uses  consecutive
               port  numbers  starting  from this value, counting up.  Care should be taken not to
               use port numbers that are actually in use by network services.
 
@@ -184,7 +184,7 @@ wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
               accuracy.
 
        -s hop Set  the  starting  hop  at  which  to begin probing.  The default is 1, so network
-              probing will begin at the host adjacent to the  host  where  pchar  is  being  run.
+              probing will begin at the host adjacent to the  host  where  pcnetm  is  being  run.
               Larger values allow probing to begin farther out from the testing host; this can be
               helpful when attempting to probe outside a local internetwork whose  characterisics
               are well-known.
@@ -194,7 +194,7 @@ wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
               library, as well as enabling at configure-time using --with-snmp.
 
        -t timeout
-              Set  the amount of time (in seconds) that pchar will wait for an ICMP error message
+              Set  the amount of time (in seconds) that pcnetm will wait for an ICMP error message
               before declaring a packet loss.  The default is 3 seconds.
 
        -T tos Set the IP Type Of Service bits  for  outgoing  UDP  packets.   This  option  isn't
@@ -211,7 +211,7 @@ wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
 
        -w file
               Write statistics to a datafile named file.  This  file  can  be  read  back  in  by
-              specifying  the  -r  option  in a subsequent run of pchar for off-line analysis, or
+              specifying  the  -r  option  in a subsequent run of pcnetm for off-line analysis, or
               parsed by other programs for plotting, etc.
 
               If file is given as  - , then the statistics are written to standard out.  In  this
@@ -228,15 +228,15 @@ wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
 ### Notes
 
 ```
-       Because pchar relies on measurements to drive its estimates of network characteristics, it
+       Because pcnetm relies on measurements to drive its estimates of network characteristics, it
        may  occasionally  produce  some  seemingly  odd  results.   Care  should  be  taken  when
-       interpreting the output of pchar.  For example, the coeffecients of determination for  the
+       interpreting the output of pcnetm.  For example, the coeffecients of determination for  the
        least squares fit can be useful in seeing how “good” of a fit the bandwidth and round-trip
        time parameters describe the performance seen by the probe packets.   The  coefficient  of
        determination  takes  values  from 0 to 1, where a value of 1 indicates that the estimated
        parameters perfectly fit the data.
 
-       Pchar was originally named pc, which was either an abbreviation for “path characteristics”
+       pcnetm was originally named pc, which was either an abbreviation for “path characteristics”
        or “pathchar clone”.
 ```
 
@@ -244,11 +244,11 @@ wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
 
 ```
        Pathchar  automatically  determines  an appropriate maximum packet size to use, based on a
-       Path MTU discovery algorithm.  Pchar relies on the user specifying the maximum packet size
+       Path MTU discovery algorithm.  pcnetm relies on the user specifying the maximum packet size
        manually.
 
        Some  versions  of  Solaris  rate-limit the generation of ICMP error messages.  Any run of
-       pchar through, or to, a Solaris machine may show abnormally high packet loss rates.   This
+       pcnetm through, or to, a Solaris machine may show abnormally high packet loss rates.   This
        feature  of  Solaris affects traceroute and pathchar as well, but not ping.  Some versions
        of Linux appear to have similar rate-limiting.  In situations such as  this,  the  use  of
        ICMP-based  probes  (selected  by  the -p option) may yield more satisfactory (or at least
@@ -264,7 +264,7 @@ wget http://www.kitchenlab.org/www/bmah/Software/pchar/pchar-1.5.tar.gz
 
 ```
        Bruce  A. Mah <bmah@acm.org>.  The author of the original pathchar utility is Van Jacobson
-       <van@ee.lbl.gov>.  The algorithms used by pchar were coded from Van Jacobson's  viewgraphs
+       <van@ee.lbl.gov>.  The algorithms used by pcnetm were coded from Van Jacobson's  viewgraphs
        describing the operation of pathchar.
 ```
 
