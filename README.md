@@ -2,7 +2,7 @@
 
 pcnetm stands for path characteristics network measurement.
 
-pcnetm is a rework of old pcnetm-1.5 to convert to modern C++.
+pcnetm is a rework of old pchar-1.5 to convert to modern C++.
 
 ### pchar
 

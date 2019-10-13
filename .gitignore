@@ -1,0 +1,4 @@
+# ignore the following files in git
+*.o
+build
+pcnetm
