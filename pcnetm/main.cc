@@ -19,6 +19,18 @@ static char rcsid[] = "$Id: main.cc 1082 2005-02-12 19:40:04Z bmah $";
 
 #include <stdio.h>
 
+/* will be used for cmake
+#define SIZEOF_BOOL
+#define HAVE_SOCKLEN_T 
+#define STDC_HEADERS 
+#define HAVE_UNISTD_H  
+#define HAVE_STRINGS_H 
+#define HAVE_HERROR 
+#define HAVE_SNPRINTF
+#define HAVE_LIBM 
+#define HAVE_IPV6
+*/
+
 #ifdef STDC_HEADERS
 #include <stdlib.h>
 #else
@@ -28,13 +40,17 @@ extern "C" {
 }
 #endif /* STDC_HEADERS */
 
+
+
+
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif /* HAVE_UNISTD_H */
 
 #include <sys/types.h>
 #include <time.h>
-#include <math.h>
+#include <cmath>
+#include <cstdlib>
 #include <netdb.h>
 #include <netinet/in.h>
 #include <netinet/in_systm.h>
@@ -63,6 +79,16 @@ extern "C" {
 #ifdef HAVE_SNMP
 #include "GetIfInfo.h"
 #endif /* HAVE_SNMP */
+
+#if 0
+template <typename T>
+struct automalloc {
+	using Anytype = T;
+	automalloc(unsigned int size){
+		std::unique_ptr<Anytype> p std::make_unique() 
+	}
+}
+#endif
 
 //
 // Forward declarations
@@ -908,7 +934,7 @@ void DoPchar(Pctest *pct)
     // Start output
     //
     if (!QuietFlag) {
-	fprintf(stdout, "pchar to %s (%s) using %s\n", pct->GetTargetName(), 
+	fprintf(stdout, "pcnetm to %s (%s) using %s\n", pct->GetTargetName(), 
 		pct->GetPrintableAddress(),
 		GetPrintableNetworkProtocol(NetworkProtocol));
 	if (PcapFlag) {
