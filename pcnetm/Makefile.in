@@ -86,7 +86,7 @@ SHELL=/bin/sh
 TAR=tar
 TOUCH=touch
 
-A.OUT=pchar
+A.OUT=pcnetm
 VERSION=@PC_VERSION@
 
 TARDIR=$(A.OUT)-$(VERSION)
