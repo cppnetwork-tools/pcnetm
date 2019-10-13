@@ -3,7 +3,8 @@
 pcnetm stands for path characteristics network measurement.
 pcnetm is a rework of old pchar-1.5 to redesign and convert to modern C++.
 ```
-
+[![C++](https://img.shields.io/badge/C%2B%2B-11-yellowgreen)](https://www.cppreference.com/) 
+[![License](https://img.shields.io/badge/license-GPL3-_red.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ### Obtaining old pchar
 
 ```
