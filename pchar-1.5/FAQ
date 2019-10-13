@@ -1,0 +1,106 @@
+PCHAR:  A TOOL FOR MEASURING NETWORK PATH CHARACTERISTICS
+Bruce A. Mah
+<bmah@kitchenlab.org>
+$Id: FAQ 1083 2005-02-12 20:10:28Z bmah $
+---------------------------------------------------------
+
+A compilation of questions, experiences, and suggestions from users of
+pchar.
+
+-----
+
+Q1.  I compiled pchar using GCC on Solaris.  When I try to run pchar,
+I get an error message that looks like this:
+
+ld.so.1: ./pchar: fatal: libstdc++.so.2.10.0: open failed: No such file or directory
+Killed
+
+A1.  When trying to link shared libraries for processes running as
+root, Solaris will only look for shared libraries in directories
+explicitly named at compile-time or in a few hardcoded directories
+such as /usr/lib.  The libraries provided with GCC are usually located
+somewhere else.
+
+To work around this problem, first determine where the library in
+question resides (the example cited above is a C++ support library
+from GCC, which installs by default into /usr/local/lib).  Then,
+before configuring the build of pchar, set the LDFLAGS environment
+variable, for example:
+
+% setenv LDFLAGS "-R /usr/local/lib"
+% ./configure
+
+(Adjust appropriately for non-csh-like shells.)
+
+Compile and install as normal.
+
+-----
+
+Q2.  pchar dies as soon as it detects a routing change.  How can I make
+it not do this?
+
+A2.  Pass the -c option to pchar, to get something similar to
+pathchar's default behavior.
+
+-----
+
+Q3.  I see really high packet losses when tracing a path through
+a Solaris machine.  Why?
+
+A3.  Solaris and Cisco IOS implement rate control on some ICMP packets
+they generate, typically limiting the rate to at most 2 packets per
+second per destination.  This prevents ICMP generation from being used
+in a possible (D)DOS attack.  Increase the gap between packets to
+slightly over 0.5s, using the -g option.  This will make pchar
+slightly slower for intermediate hops, but will speed up the last hop
+significantly.
+
+-----
+
+Q4.  Sometimes I get negative values for round-trip-time and bandwidth
+estimates.  What gives?
+
+A4.  pchar relies on being able to infer the characteristics of
+network links.  Essentially this involves sending packets into the
+network and measuring their response times, and then analyzing the
+results.  Any or all of the following conditions can cause negative
+round-trip-times or bandwidths:
+
+1.  Excessive packet loss along a link, leading to a lack of useful
+data from which to estimate link parameters.
+
+2.  Variations in the amount of time taken for routers to process
+packets (for example, the forwarding codepath taking less time than
+the ICMP packet generation codepath).
+
+3.  Transient changes in network conditions for links that have been
+previously measured.
+
+pchar-1.3 and later will actually replace negative values here by
+hyphens, to indicate that the estimates are most likely not valid.
+
+-----
+
+Q5.  Many of the measurement times recorded by my OSF/1
+(a.k.a. Digital UNIX or Tru64) machine are zero, and I see the message
+"Warning: No non-zero timestamps measured, bumping up to 0.0000001".
+What can I do about this?
+
+A5.  According to Jeffrey Mogul <mogul@pa.dec.com>, the default kernel
+clock resolution on an OSF/1 machine is 1024Hz (which gives millisecond
+resolution, rather than microsecond resolution, as is the case for
+many other UNIX systems).  He writes that:
+
+	...for Tru64, you [could] recommend enabling the MICRO_TIME
+	kernel option, to get sufficient timing resolution.  To enable
+	this option, add the following line to the kernel
+	configuration file
+
+	     options MICRO_TIME
+
+	and rebuild the kernel.
+
+-----
+
+
+
