@@ -22,12 +22,12 @@
 
 #include <stdio.h>
 
-#if STDC_HEADERS
+#if defined(STDC_HEADERS)
 #include <stdlib.h>
 #include <string.h>
 #endif /* STDC_HEADERS */
 
-#if HAVE_UNISTD_H
+#if defined(HAVE_UNISTD_H)
 #include <sys/types.h>
 #endif /* HAVE_UNISTD_H */
 

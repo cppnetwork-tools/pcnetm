@@ -25,19 +25,19 @@
 
 #include <stdio.h>
 
-#if STDC_HEADERS
+#if defined(STDC_HEADERS)
 #include <stdlib.h>
 #include <string.h>
 #endif /* STDC_HEADERS */
 
-#if HAVE_UNISTD_H
+#if defined(HAVE_UNISTD_H)
 #include <sys/types.h>
 #endif /* HAVE_UNISTD_H */
 
 #include <sys/socket.h>
 #include <sys/time.h>
 
-#if HAVE_PCAP
+#if defined(HAVE_PCAP)
 #include <pcap.h>
 #endif /* HAVE_PCAP */
 
@@ -104,7 +104,7 @@ class Pctest {
     struct timeval tvBefore, tvAfter;	// timestamps
     struct timeval syscallTime;	// estimated overhead for gettimeofday()
 
-#if HAVE_PCAP
+#if defined(HAVE_PCAP)
     pcap_t *pc;			// pcap structure
     bpf_u_int32 netp, maskp;	// net and mask parameters
     struct bpf_program fp;	// filter program

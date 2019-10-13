@@ -19,11 +19,11 @@
 #ifndef PCTESTIPV4_H
 #define PCTESTIPV4_H
 
-#if HAVE_UNISTD_H
+#if defined(HAVE_UNISTD_H)
 #include <unistd.h>
 #endif /* HAVE_UNISTD_H */
 
-#if STDC_HEADERS
+#if defined(STDC_HEADERS)
 #include <string.h>
 #endif /* STDC_HEADERS */
 
@@ -31,7 +31,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-#if HAVE_STRINGS_H
+#if defined(HAVE_STRINGS_H)
 #include <strings.h>
 #endif /* HAVE_STRINGS_H */
 
