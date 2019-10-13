@@ -909,11 +909,7 @@ void ResultTable::lmsint(double &a, double &b, double &r2)
 	l = 0;
 	for (i = 0; i < columns; i++) {
 	    if (partialmins[i] != timeoutresult) {
-		residuals[l] = abs(partialmins[i] - 
-				   ((currentslope * 
-				     column2size(i) /
-				     slopescale) +
-				    currentintercept));
+		residuals[l] = abs( static_cast<int>(partialmins[i] - ((currentslope * column2size(i) /slopescale) + currentintercept)));
 		ys[l] = partialmins[i];
 		
 		l++;
@@ -930,7 +926,7 @@ void ResultTable::lmsint(double &a, double &b, double &r2)
 	l = 0;
 	for (i = 0; i < columns; i++) {
 	    if (partialmins[i] != timeoutresult) {
-		ys[l] = abs(partialmins[i] - mediany);
+		ys[l] = abs(static_cast<int>(partialmins[i] - mediany));
 		l++;
 	    }
 	}
