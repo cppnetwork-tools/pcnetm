@@ -267,6 +267,22 @@ wget http://www.kitchenlab.org/www/bmah/Software/pcnetm/pcnetm-1.5.tar.gz
        describing the operation of pathchar.
 ```
 
+### To Obtain and Build
+
+```
+git clone https://github.com/cppnetwork-tools/pcnetm
+
+% ./configure
+% make
+
+To enable IPv6 support, give the --with-ipv6 option to configure.  If
+there is a directory for IPv6-specific libraries, it can be specified
+via an argument to the --with-ipv6 option, for example:
+
+% ./configure --with-ipv6=/usr/local/v6
+% make
+```
+
 ### Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
