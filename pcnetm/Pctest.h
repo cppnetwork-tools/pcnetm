@@ -47,7 +47,7 @@ class TestRecord;
 
 // Action codes.  ICMPv4 and ICMPv6 have different values for their type
 // and code fields.  The Pctest abstracts these differences.
-typedef enum {
+enum class PctestActionType {
     PctestActionReserved = 0,	// reserved code
     PctestActionValid = 1,	// store valid measurement (e.g. ICMP
 				// time exceeded)
@@ -57,7 +57,7 @@ typedef enum {
 				// ICMP prohibited)
     PctestActionTimeout = 4,	// Timeout
     PctestActionAbort = 255	// huh?  we haven't a clue
-} PctestActionType;
+};
 
 class Pctest {
 

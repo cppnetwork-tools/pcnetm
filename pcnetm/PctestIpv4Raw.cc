@@ -454,7 +454,7 @@ int PctestIpv4Raw::Test(TestRecord &tr)
 	    memset(tr.icmpSourceAddress, 0, sizeof(in_addr));
 	    tr.icmpSourceAddressLength = sizeof(in_addr);
 
-	    tr.result = PctestActionTimeout;
+	    tr.result = PctestActionType::PctestActionTimeout;
 
 	    done = 1;
 

@@ -978,7 +978,7 @@ void DoPchar(Pctest *pct)
 		exit(1);
 	    }
 	    
-	    if (tr->result == PctestActionTimeout) {
+	    if (tr->result == PctestActionType::PctestActionTimeout) {
 		timeouts++;
 	    }
 	    else {
@@ -1146,7 +1146,7 @@ void DoPchar(Pctest *pct)
 
 		// Check for a timeout.  If we got one, then increment
 		// the appropriate counter and keep going.
-		if (tr->result == PctestActionTimeout) {
+		if (tr->result == PctestActionType::PctestActionTimeout) {
 		    packetsLost++;
 		    delete tr;
 		    continue;
@@ -1204,8 +1204,8 @@ void DoPchar(Pctest *pct)
 
 		// If we received a valid (to us) ICMP message, then
 		// attempt to store timing information.
-		if ((pcta == PctestActionValid) || 
-		    (pcta == PctestActionValidLasthop)) {
+		if ((pcta == PctestActionType::PctestActionValid) || 
+		    (pcta == PctestActionType::PctestActionValidLasthop)) {
 
 		    if ((PartialResults[i]->put(
 			tr->size + tr->replsize, rtt)) < 0) {
@@ -1213,7 +1213,7 @@ void DoPchar(Pctest *pct)
 			abort();
 		    }
 		}
-		else if (pcta == PctestActionFiltered) {
+		else if (pcta == PctestActionType::PctestActionFiltered) {
 
 		    // We hit a firewall or something that's going
 		    // to mess with our packets.  Give up now.
@@ -1232,7 +1232,7 @@ void DoPchar(Pctest *pct)
 
 		// If ICMP type was time exceeded, we know this is *not*
 		// the last hop.
-		if (pcta != PctestActionValidLasthop) {
+		if (pcta != PctestActionType::PctestActionValidLasthop) {
 		    lastHopFlag = false;
 		}
 
@@ -1675,7 +1675,7 @@ void DoTrout(Pctest *pct)
 
 	// Check for a timeout.  If we got one, then increment
 	// the appropriate counter and keep going.
-	if (tr->result == PctestActionTimeout) {
+	if (tr->result == PctestActionType::PctestActionTimeout) {
 	    packetsLost++;
 	    delete tr;
 	    continue;
@@ -1694,11 +1694,11 @@ void DoTrout(Pctest *pct)
 
 	// If we received a valid (to us) ICMP message, then
 	// attempt to store timing information.
-	if ((pcta == PctestActionValid) || 
-	    (pcta == PctestActionValidLasthop)) {
+	if ((pcta == PctestActionType::PctestActionValid) || 
+	    (pcta == PctestActionType::PctestActionValidLasthop)) {
 	  // XXX Do we write out something here?
 	}
-	else if (pcta == PctestActionFiltered) {
+	else if (pcta == PctestActionType::PctestActionFiltered) {
 
 	    // We hit a firewall or something that's going
 	    // to mess with our packets.  Give up now.
@@ -1718,7 +1718,7 @@ void DoTrout(Pctest *pct)
 
 	// If ICMP type was time exceeded, we know this is *not*
 	// the last hop.
-	if (pcta != PctestActionValidLasthop) {
+	if (pcta != PctestActionType::PctestActionValidLasthop) {
 	    lastHopFlag = false;
 	}
 

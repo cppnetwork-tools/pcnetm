@@ -446,7 +446,7 @@ int PctestIpv4Icmp::Test(TestRecord &tr)
 	    memset(tr.icmpSourceAddress, 0, sizeof(in_addr));
 	    tr.icmpSourceAddressLength = sizeof(in_addr);
 
-	    tr.result = PctestActionTimeout;
+	    tr.result = PctestActionType::PctestActionTimeout;
 
 	    done = 1;
 	}
@@ -493,16 +493,16 @@ unsigned int PctestIpv4Icmp::GetMinSize()
 PctestActionType PctestIpv4Icmp::GetAction(int icmpType, int icmpCode) 
 {
     if (icmpType == ICMP_TIMXCEED) {
-	return PctestActionValid;
+	return PctestActionType::PctestActionValid;
     }
     else if (icmpType == ICMP_ECHOREPLY) {
-	return PctestActionValidLasthop;
+	return PctestActionType::PctestActionValidLasthop;
     }
     else if ((icmpType == ICMP_UNREACH) &&
 	     (icmpCode == ICMP_UNREACH_FILTER_PROHIB)) {
-	return PctestActionFiltered;
+	return PctestActionType::PctestActionFiltered;
     }
     else {
-	return PctestActionAbort;
+	return PctestActionType::PctestActionAbort;
     }
 }

@@ -448,17 +448,17 @@ unsigned int PctestIpv4Tcp::GetMinSize()
 PctestActionType PctestIpv4Tcp::GetAction(int icmpType, int icmpCode) 
 {
     if (icmpType == ICMP_TIMXCEED) {
-	return PctestActionValid;
+	return PctestActionType::PctestActionValid;
     }
     else if ((icmpType == ICMP_UNREACH) &&
 	     (icmpCode == ICMP_UNREACH_PORT)) {
-	return PctestActionValidLasthop;
+	return PctestActionType::PctestActionValidLasthop;
     }
     else if ((icmpType == ICMP_UNREACH) &&
 	     (icmpCode == ICMP_UNREACH_FILTER_PROHIB)) {
-	return PctestActionFiltered;
+	return PctestActionType::PctestActionFiltered;
     }
     else {
-	return PctestActionAbort;
+	return PctestActionType::PctestActionAbort;
     }
 }

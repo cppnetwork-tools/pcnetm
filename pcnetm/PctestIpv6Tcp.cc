@@ -432,7 +432,7 @@ int PctestIpv6Tcp::Test(TestRecord &tr)
 		tr.icmpSourceAddress = new char[sizeof(in6_addr)];
 		memcpy(tr.icmpSourceAddress, &(ipv6HeaderIn->ip6_src), sizeof(in6_addr));
 		tr.icmpSourceAddressLength = sizeof(in6_addr);
-		tr.result = PctestActionValidLasthop;
+		tr.result = PctestActionType::PctestActionValidLasthop;
 		done = 1;
 	    }
 	}
@@ -444,7 +444,7 @@ int PctestIpv6Tcp::Test(TestRecord &tr)
 	    memset(tr.icmpSourceAddress, 0, sizeof(in6_addr));
 	    tr.icmpSourceAddressLength = sizeof(in6_addr);
 
-	    tr.result = PctestActionTimeout;
+	    tr.result = PctestActionType::PctestActionTimeout;
 
 	    done = 1;
 	}
@@ -494,16 +494,16 @@ unsigned int PctestIpv6Tcp::GetMinSize()
 PctestActionType PctestIpv6Tcp::GetAction(int icmp6_type, int icmp6_code)
 {
     if (icmp6_type == ICMP6_TIME_EXCEEDED) {
-	return PctestActionValid;
+	return PctestActionType::PctestActionValid;
     }
     else if (icmp6_type == ICMP6_ECHO_REPLY) {
-	return PctestActionValidLasthop;
+	return PctestActionType::PctestActionValidLasthop;
     }
     else if ((icmp6_type == ICMP6_DST_UNREACH) &&
 	     (icmp6_code == ICMP6_DST_UNREACH_ADMIN)) {
-	return PctestActionFiltered;
+	return PctestActionType::PctestActionFiltered;
     }
     else {
-	return PctestActionAbort;
+	return PctestActionType::PctestActionAbort;
     }
 }

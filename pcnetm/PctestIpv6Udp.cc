@@ -373,7 +373,7 @@ int PctestIpv6Udp::Test(TestRecord &tr)
 	    memset(tr.icmpSourceAddress, 0, sizeof(in6_addr));
 	    tr.icmpSourceAddressLength = sizeof(in6_addr);
 
-	    tr.result = PctestActionTimeout;
+	    tr.result = PctestActionType::PctestActionTimeout;
 
 	    done = 1;
 	}
@@ -415,17 +415,17 @@ unsigned int PctestIpv6Udp::GetMinSize()
 PctestActionType PctestIpv6Udp::GetAction(int icmpType, int icmpCode)
 {
     if (icmpType == ICMP6_TIME_EXCEEDED) {
-	return PctestActionValid;
+	return PctestActionType::PctestActionValid;
     }
     else if ((icmpType == ICMP6_DST_UNREACH) &&
 	     (icmpCode == ICMP6_DST_UNREACH_NOPORT)) {
-	return PctestActionValidLasthop;
+	return PctestActionType::PctestActionValidLasthop;
     }
     else if ((icmpType == ICMP6_DST_UNREACH) &&
 	     (icmpCode == ICMP6_DST_UNREACH_ADMIN)) {
-	return PctestActionFiltered;
+	return PctestActionType::PctestActionFiltered;
     }
     else {
-	return PctestActionAbort;
+	return PctestActionType::PctestActionAbort;
     }
 }
