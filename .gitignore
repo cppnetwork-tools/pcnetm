@@ -9,6 +9,8 @@ build
 # binaries
 pcnetm
 
+# ctags
+tags
 
 # adding linux gitignore below
 *~
